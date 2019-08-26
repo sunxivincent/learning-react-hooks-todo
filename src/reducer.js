@@ -9,6 +9,20 @@ export function TodosReducer (state, action) {
         ...state,
         todos: toggledTodos
       };
+    case "UPDATE_TODO": {
+      const updatedTodo = {...state.currentTodo, text: action.payload};
+      const updatedTodoIndex = state.todos.findIndex(t => t.id === updatedTodo.id);
+      const updatedTodos = [
+        ...state.todos.slice(0, updatedTodoIndex),
+        updatedTodo,
+        ...state.todos.slice(updatedTodoIndex+1)
+      ];
+      return {
+        ...state,
+        todos: updatedTodos,
+        currentTodo: {}
+      }
+    }
     case "REMOVE_TODO":
       const removedTodos = state.todos.filter(t => t.id !== action.payload.id);
       return {
@@ -25,6 +39,11 @@ export function TodosReducer (state, action) {
       return {
         ...state,
         todos: newTodos
+      };
+    case "SET_CURRENT_TODO":
+      return {
+        ...state,
+        currentTodo: action.payload,
       };
     default:
       return state;
