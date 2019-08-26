@@ -1,3 +1,5 @@
+import uuidv4 from 'uuid/v4';
+
 export function TodosReducer (state, action) {
   switch (action.type) {
     case "TOGGLE_TODO":
@@ -12,6 +14,17 @@ export function TodosReducer (state, action) {
       return {
         ...state,
         todos: removedTodos
+      };
+    case "ADD_TODO":
+      const newTodo = {
+        id: uuidv4(),
+        text: action.payload,
+        complete: false
+      };
+      const newTodos = [... state.todos, newTodo];
+      return {
+        ...state,
+        todos: newTodos
       };
     default:
       return state;

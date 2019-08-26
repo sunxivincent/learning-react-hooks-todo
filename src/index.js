@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { TodosContext } from './context';
 import { TodosReducer }from './reducer';
 import { TodoList} from "./component/TodoList";
+import { TodoForm} from "./component/TodoForm";
 import * as serviceWorker from './serviceWorker';
 
 const App = () => {
@@ -13,6 +14,7 @@ const App = () => {
     // its value is no longer = todos but determined by the value
     // prop above it
     <TodosContext.Provider value={{ state, dispatch }}>
+      <TodoForm/>
       <TodoList/>
     </TodosContext.Provider>
   );
