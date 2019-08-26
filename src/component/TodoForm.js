@@ -8,6 +8,8 @@ export function TodoForm() {
   useEffect(() => {
     if (currentTodo.text) {
       setTodo(currentTodo.text);
+    } else {
+      setTodo("");
     }
   }, [currentTodo.id]);
 
